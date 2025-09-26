@@ -1,52 +1,24 @@
-name: C++ CI/CD
+cmake_minimum_required(VERSION 3.10.0)
+project(PYTHON VERSION 0.1.0 LANGUAGES C CXX)
 
-on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+if(DEFINED VERSION_PROJECT)
+    add_definitions(-DVERSION_PROJECT="${VERSION_PROJECT}")
+else()
+    add_definitions(-DVERSION_PROJECT="0")
+endif()
 
-jobs:
-  build:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]  # Две разные ОС
-    
-    runs-on: ${{ matrix.os }}
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0  # Важно для получения тегов!
-    
-    - name: Get version from tag
-      id: get_version
-      run: |
-        if [[ "${{ github.ref }}" == refs/tags/* ]]; then
-          # Если это тег: v1.0.0 → 1.0.0
-          VERSION="${GITHUB_REF#refs/tags/v}"
-          echo "Using tag version: $VERSION"
-        else
-          # Если обычный коммит
-          VERSION="1.0.0-dev"
-          echo "Using dev version: $VERSION"
-        fi
-        echo "VERSION=$VERSION" >> $GITHUB_ENV
-    
-    - name: Setup CMake
-      uses: actions/setup-cmake@v2
-    
-    - name: Configure CMake
-      run: cmake -B build -S . -DVERSION_PROJECT="$VERSION"
-    
-    - name: Build project
-      run: cmake --build build
-    
-    - name: Run program
-      run: |
-        if [ "${{ matrix.os }}" == "windows-latest" ]; then
-          ./build/Release/hello_world.exe
-        else
-          ./build/hello_world
-        fi
+add_executable(PYTHON main.cpp)
+
+set(CPACK_PACKAGE_NAME "PYTHON")
+set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
+
+if(WIN32)
+set(CPACK_GENERATOR "ZIP")
+endif()
+
+if(UNIX AND NOT APPLE)
+set(CPACK_GENERATOR "DEB")
+endif()
+
+install(TARGETS PYTHON DESTINATION bin)
+include(CPack)
