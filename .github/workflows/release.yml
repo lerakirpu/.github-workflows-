@@ -71,13 +71,13 @@ jobs:
 
       - name: Run and test
         run: |
-          echo "1" | ./build/LAB1
+          echo "1" | ./build/.github/workflows
           echo "Program executed successfully"
 
       - name: Verify version
         run: |
           echo "=== Program output ==="
-          output=$(echo "1" | ./build/LAB1)
+          output=$(echo "1" | ./build/.github/workflows)
           echo "$output"
           if echo "$output" | grep -q "Version"; then
             echo "✓ Version found in output"
@@ -94,7 +94,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ needs.create-release.outputs.new_tag }}
-          files: LAB1-*.deb
+          files: .github/workflows-*.deb
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -118,13 +118,13 @@ jobs:
 
       - name: Run and test
         run: |
-          echo "1" | .\build\LAB1.exe
+          echo "1" | .\build\.github/workflows.exe
           echo "Program executed successfully"
 
       - name: Verify version
         run: |
           echo "=== Program output ==="
-          $output = echo "1" | .\build\LAB1.exe
+          $output = echo "1" | .\build\.github/workflows.exe
           echo $output
           if ($output -like "*Version*") {
             echo "✓ Version found in output"
@@ -141,6 +141,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ needs.create-release.outputs.new_tag }}
-          files: LAB1-*.zip
+          files: .github/workflows-*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
