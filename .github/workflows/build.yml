@@ -35,7 +35,7 @@ jobs:
         echo "VERSION=$VERSION" >> $GITHUB_ENV
     
     - name: Setup CMake
-      uses: actions/.github-workflows-@v2
+      uses: .github-workflows-/actions-@v2
     
     - name: Configure CMake
       run: cmake -B build -S . -DVERSION_PROJECT="$VERSION"
