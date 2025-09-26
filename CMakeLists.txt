@@ -1,24 +1,13 @@
-cmake_minimum_required(VERSION 3.10.0)
-project(PYTHON VERSION 0.1.0 LANGUAGES C CXX)
+cmake_minimum_required(VERSION 3.10)
+project(HelloWorld VERSION 0.1.0)
 
+# Получаем версию из внешней переменной
 if(DEFINED VERSION_PROJECT)
+    message(STATUS "Using version from CI: ${VERSION_PROJECT}")
     add_definitions(-DVERSION_PROJECT="${VERSION_PROJECT}")
 else()
-    add_definitions(-DVERSION_PROJECT="0")
+    # Локальная разработка - используем версию из CMake
+    add_definitions(-DVERSION_PROJECT="${PROJECT_VERSION}")
 endif()
 
-add_executable(PYTHON main.cpp)
-
-set(CPACK_PACKAGE_NAME "PYTHON")
-set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
-
-if(WIN32)
-set(CPACK_GENERATOR "ZIP")
-endif()
-
-if(UNIX AND NOT APPLE)
-set(CPACK_GENERATOR "DEB")
-endif()
-
-install(TARGETS PYTHON DESTINATION bin)
-include(CPack)
+add_executable(hello_world main.cpp)
