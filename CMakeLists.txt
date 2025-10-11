@@ -1,13 +1,28 @@
-cmake_minimum_required(VERSION 3.10)
-project(HelloWorld VERSION 0.1.0)
+cmake_minimum_required(VERSION 3.10.0)
+project(LAB1 VERSION 0.1.0 LANGUAGES C CXX)
 
-# Получаем версию из внешней переменной
 if(DEFINED VERSION_PROJECT)
-    message(STATUS "Using version from CI: ${VERSION_PROJECT}")
     add_definitions(-DVERSION_PROJECT="${VERSION_PROJECT}")
 else()
-    # Локальная разработка - используем версию из CMake
-    add_definitions(-DVERSION_PROJECT="${PROJECT_VERSION}")
+    add_definitions(-DVERSION_PROJECT="0")
 endif()
 
-add_executable(hello_world main.cpp)
+add_executable(LAB1 main.cpp)
+
+
+
+set(CPACK_PACKAGE_NAME "LAB1")
+
+set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
+
+if(WIN32)
+set(CPACK_GENERATOR "ZIP")
+endif()
+
+if(UNIX AND NOT APPLE)
+set(CPACK_GENERATOR "DEB")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Ivan Obuhov <vanushabrend@gmail.com>")
+endif()
+
+install(TARGETS LAB1 DESTINATION bin)
+include(CPack)
