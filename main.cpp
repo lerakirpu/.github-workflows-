@@ -5,6 +5,6 @@
 #endif
 
 int main(int, char**){
-    std::cout << "Hello, World! Version " << VERSION_PROJECT << std::endl; #версия проекта
+    std::cout << "Hello, World! Version " << VERSION_PROJECT << std::endl; // версия проекта
     return 0;
 }
