@@ -8,49 +8,55 @@ permissions:
   contents: write
 
 jobs:
- create-release:
-  runs-on: ubuntu-latest
-  outputs:
-    new_tag: ${{ steps.set_output.outputs.new_tag }} 
-  
-  steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+  create-release:
+    runs-on: ubuntu-latest
+    outputs:
+      new_tag: ${{ steps.bump_version.outputs.new_tag }}
 
-    - name: Get latest tag
-      id: get_tag
-      run: |
-        git fetch --tags --force
-        last_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v1.0.0")
-        echo "last_tag=$last_tag" >> $GITHUB_OUTPUT
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-    - name: Bump version
-      id: bump_version
-      run: |
-        IFS='.' read -r major minor patch <<< "${last_tag//v/}"
-        patch=$((patch + 1))
-        new_tag="v$major.$minor.$patch"
-        echo "new_tag=$new_tag" >> $GITHUB_OUTPUT
+      - name: Get latest tag
+        id: get_tag
+        run: |
+          git fetch --tags --force
+          last_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "0.0.0")
+          echo "last_tag=$last_tag" >> $GITHUB_ENV
+          echo "last_tag=$last_tag" >> $GITHUB_OUTPUT
 
-    - name: Set output
-      id: set_output
-      run: |
-        echo "new_tag=${{ steps.bump_version.outputs.new_tag }}" >> $GITHUB_OUTPUT
+      - name: Bump version
+        id: bump_version
+        run: |
+          last_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v1.0.0")
+          echo "last_tag=$last_tag" >> $GITHUB_ENV
+          echo "last_tag=$last_tag" >> $GITHUB_OUTPUT
 
-    - name: Show version info
-      run: |
-        echo "Last tag: ${{ steps.get_tag.outputs.last_tag }}"
-        echo "New tag: ${{ steps.bump_version.outputs.new_tag }}"
+          
+          if [[ ! $last_tag =~ ^v1\.0\. ]]; then
+          last_tag="v1.0.0"
+          fi
+    
+          IFS='.' read -r major minor patch <<< "${last_tag//v/}"
+          patch=$((patch + 1))
+          new_tag="v$major.$minor.$patch"
+          echo "new_tag=$new_tag" >> $GITHUB_ENV
+          echo "new_tag=$new_tag" >> $GITHUB_OUTPUT
 
-    - name: Create Release
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: ${{ steps.bump_version.outputs.new_tag }}
-        name: Release ${{ steps.bump_version.outputs.new_tag }}
-        generate_release_notes: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Show version info
+        run: |
+          echo "Last tag: ${{ env.last_tag }}"
+          echo "New tag: ${{ env.new_tag }}"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ env.new_tag }}
+          name: Release ${{ env.new_tag }}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-linux:
     needs: create-release
