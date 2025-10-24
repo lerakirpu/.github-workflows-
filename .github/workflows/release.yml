@@ -67,6 +67,11 @@ jobs:
       - name: Clean build directory
         run: rm -rf build
 
+      - name: Clean CMake cache
+        run: |
+         rm -rf build
+         rm -f CMakeCache.txt 
+
       - name: Install Ninja
         run: sudo apt-get update && sudo apt-get install -y ninja-build
 
