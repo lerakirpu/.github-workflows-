@@ -1,0 +1,9 @@
+C:/Users/user/Documents/python/build/CMakeFiles/LAB1.dir
+C:/Users/user/Documents/python/build/CMakeFiles/package.dir
+C:/Users/user/Documents/python/build/CMakeFiles/package_source.dir
+C:/Users/user/Documents/python/build/CMakeFiles/edit_cache.dir
+C:/Users/user/Documents/python/build/CMakeFiles/rebuild_cache.dir
+C:/Users/user/Documents/python/build/CMakeFiles/list_install_components.dir
+C:/Users/user/Documents/python/build/CMakeFiles/install.dir
+C:/Users/user/Documents/python/build/CMakeFiles/install/local.dir
+C:/Users/user/Documents/python/build/CMakeFiles/install/strip.dir
