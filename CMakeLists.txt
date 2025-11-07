@@ -6,7 +6,6 @@ else()
     project(LAB1 VERSION 0.0.0 LANGUAGES C CXX)
 endif()
 
-# Всегда используем версию из CMake
 add_definitions(-DVERSION_PROJECT="${PROJECT_VERSION}")
 
 add_executable(LAB1 main.cpp)
