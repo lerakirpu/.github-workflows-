@@ -1,7 +1,7 @@
 #include <iostream>
 
 #ifndef VERSION_PROJECT
-#define VERSION_PROJECT "1.0.0"
+#define VERSION_PROJECT "1.0.2"
 #endif
 
 int main(int, char**){
