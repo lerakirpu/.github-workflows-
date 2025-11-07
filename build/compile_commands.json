@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/Users/user/Documents/python/build",
+  "command": "C:\\msys64\\mingw64\\bin\\c++.exe -DVERSION_PROJECT=\\\"1.0.0\\\" -g -o CMakeFiles\\LAB1.dir\\main.cpp.obj -c C:\\Users\\user\\Documents\\python\\main.cpp",
+  "file": "C:\\Users\\user\\Documents\\python\\main.cpp",
+  "output": "CMakeFiles\\LAB1.dir\\main.cpp.obj"
+}
+]
