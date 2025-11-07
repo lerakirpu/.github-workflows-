@@ -1,11 +1,13 @@
 cmake_minimum_required(VERSION 3.10.0)
-project(LAB1 VERSION 1.0.0 LANGUAGES C CXX)
 
-if(DEFINED VERSION_PROJECT)
-    add_definitions(-DVERSION_PROJECT="${VERSION_PROJECT}")
+if(DEFINED ENV{GITHUB_RUN_NUMBER})
+    project(LAB1 VERSION 0.0.$ENV{GITHUB_RUN_NUMBER} LANGUAGES C CXX)
 else()
-    add_definitions(-DVERSION_PROJECT="${PROJECT_VERSION}")
+    project(LAB1 VERSION 0.0.0 LANGUAGES C CXX)
 endif()
+
+# Всегда используем версию из CMake
+add_definitions(-DVERSION_PROJECT="${PROJECT_VERSION}")
 
 add_executable(LAB1 main.cpp)
 
