@@ -7,7 +7,7 @@ else()
     project(LAB1 VERSION 1.0.0 LANGUAGES C CXX)
 endif()
 
-add_definitions(-DVERSION_PROJECT="${PROJECT_VERSION}")
+add_definitions(-DVERSION_PROJECT=\"${PROJECT_VERSION}\")
 
 add_executable(LAB1 main.cpp)
 
