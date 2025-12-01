@@ -24,7 +24,7 @@ CMAKE_AR:FILEPATH=C:/msys64/mingw64/bin/ar.exe
 CMAKE_BUILD_TYPE:STRING=Debug
 
 //CXX compiler
-CMAKE_CXX_COMPILER:STRING=C:/msys64/mingw64/bin/c++.exe
+CMAKE_CXX_COMPILER:FILEPATH=C:/msys64/mingw64/bin/c++.exe
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -34,8 +34,26 @@ CMAKE_CXX_COMPILER_AR:FILEPATH=C:/msys64/mingw64/bin/gcc-ar.exe
 // for the GCC compiler
 CMAKE_CXX_COMPILER_RANLIB:FILEPATH=C:/msys64/mingw64/bin/gcc-ranlib.exe
 
+//Flags used by the CXX compiler during all build types.
+CMAKE_CXX_FLAGS:STRING=
+
+//Flags used by the CXX compiler during DEBUG builds.
+CMAKE_CXX_FLAGS_DEBUG:STRING=-g
+
+//Flags used by the CXX compiler during MINSIZEREL builds.
+CMAKE_CXX_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
+
+//Flags used by the CXX compiler during RELEASE builds.
+CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
+
+//Flags used by the CXX compiler during RELWITHDEBINFO builds.
+CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
+
+//Libraries linked by default with all C++ applications.
+CMAKE_CXX_STANDARD_LIBRARIES:STRING=-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+
 //C compiler
-CMAKE_C_COMPILER:STRING=C:/msys64/mingw64/bin/cc.exe
+CMAKE_C_COMPILER:FILEPATH=C:/msys64/mingw64/bin/cc.exe
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -90,6 +108,9 @@ CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE
 //Value Computed by CMake.
 CMAKE_FIND_PACKAGE_REDIRECTS_DIR:STATIC=C:/Users/user/Documents/python/build/CMakeFiles/pkgRedirects
 
+//Convert GNU import libraries to MS format (requires Visual Studio)
+CMAKE_GNUtoMS:BOOL=OFF
+
 //Install path prefix, prepended onto install directories.
 CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/LAB1
 
@@ -129,6 +150,9 @@ CMAKE_OBJCOPY:FILEPATH=C:/msys64/mingw64/bin/objcopy.exe
 CMAKE_OBJDUMP:FILEPATH=C:/msys64/mingw64/bin/objdump.exe
 
 //Value Computed by CMake
+CMAKE_PROJECT_COMPAT_VERSION:STATIC=
+
+//Value Computed by CMake
 CMAKE_PROJECT_DESCRIPTION:STATIC=
 
 //Value Computed by CMake
@@ -136,6 +160,9 @@ CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
 CMAKE_PROJECT_NAME:STATIC=LAB1
+
+//Value Computed by CMake
+CMAKE_PROJECT_SPDX_LICENSE:STATIC=
 
 //Value Computed by CMake
 CMAKE_PROJECT_VERSION:STATIC=1.0.0
@@ -203,23 +230,23 @@ CMAKE_SKIP_INSTALL_RPATH:BOOL=NO
 //If set, runtime paths are not added when using shared libraries.
 CMAKE_SKIP_RPATH:BOOL=NO
 
-//Flags used by the linker during the creation of static libraries
+//Flags used by the archiver during the creation of static libraries
 // during all build types.
 CMAKE_STATIC_LINKER_FLAGS:STRING=
 
-//Flags used by the linker during the creation of static libraries
+//Flags used by the archiver during the creation of static libraries
 // during DEBUG builds.
 CMAKE_STATIC_LINKER_FLAGS_DEBUG:STRING=
 
-//Flags used by the linker during the creation of static libraries
+//Flags used by the archiver during the creation of static libraries
 // during MINSIZEREL builds.
 CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL:STRING=
 
-//Flags used by the linker during the creation of static libraries
+//Flags used by the archiver during the creation of static libraries
 // during RELEASE builds.
 CMAKE_STATIC_LINKER_FLAGS_RELEASE:STRING=
 
-//Flags used by the linker during the creation of static libraries
+//Flags used by the archiver during the creation of static libraries
 // during RELWITHDEBINFO builds.
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
@@ -234,6 +261,12 @@ CMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND
 // during the make.  This is useful for debugging only. With Visual
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
+
+//Enable to build 7-Zip source packages
+CPACK_SOURCE_7Z:BOOL=ON
+
+//Enable to build ZIP source packages
+CPACK_SOURCE_ZIP:BOOL=ON
 
 //Value Computed by CMake
 LAB1_BINARY_DIR:STATIC=C:/Users/user/Documents/python/build
@@ -258,7 +291,7 @@ CMAKE_CACHEFILE_DIR:INTERNAL=c:/Users/user/Documents/python/build
 //Major version of cmake used to create the current loaded cache
 CMAKE_CACHE_MAJOR_VERSION:INTERNAL=4
 //Minor version of cmake used to create the current loaded cache
-CMAKE_CACHE_MINOR_VERSION:INTERNAL=0
+CMAKE_CACHE_MINOR_VERSION:INTERNAL=2
 //Patch version of cmake used to create the current loaded cache
 CMAKE_CACHE_PATCH_VERSION:INTERNAL=0
 //Path to CMake executable.
@@ -273,8 +306,18 @@ CMAKE_CXX_COMPILER-ADVANCED:INTERNAL=1
 CMAKE_CXX_COMPILER_AR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_COMPILER_RANLIB
 CMAKE_CXX_COMPILER_RANLIB-ADVANCED:INTERNAL=1
-//Result of TRY_COMPILE
-CMAKE_C_ABI_COMPILED:INTERNAL=FALSE
+//ADVANCED property for variable: CMAKE_CXX_FLAGS
+CMAKE_CXX_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_CXX_FLAGS_DEBUG
+CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_CXX_FLAGS_MINSIZEREL
+CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_CXX_FLAGS_RELEASE
+CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_CXX_FLAGS_RELWITHDEBINFO
+CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_CXX_STANDARD_LIBRARIES
+CMAKE_CXX_STANDARD_LIBRARIES-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_COMPILER
 CMAKE_C_COMPILER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_COMPILER_AR
@@ -397,4 +440,8 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_TAPI-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CPACK_SOURCE_7Z
+CPACK_SOURCE_7Z-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CPACK_SOURCE_ZIP
+CPACK_SOURCE_ZIP-ADVANCED:INTERNAL=1
 
