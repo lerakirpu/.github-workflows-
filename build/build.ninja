@@ -12,7 +12,7 @@
 
 # =============================================================================
 # Project: LAB1
-# Configurations: 
+# Configurations: Debug
 # =============================================================================
 
 #############################################
@@ -20,6 +20,11 @@
 
 ninja_required_version = 1.5
 
+
+#############################################
+# Set configuration variable for custom commands.
+
+CONFIGURATION = Debug
 # =============================================================================
 # Include auxiliary files.
 
@@ -44,9 +49,11 @@ cmake_ninja_workdir = C$:/Users/user/Documents/python/build/
 
 build cmake_object_order_depends_target_LAB1: phony || .
 
-build CMakeFiles/LAB1.dir/main.cpp.obj: CXX_COMPILER__LAB1_unscanned_ C$:/Users/user/Documents/python/main.cpp || cmake_object_order_depends_target_LAB1
+build CMakeFiles/LAB1.dir/main.cpp.obj: CXX_COMPILER__LAB1_unscanned_Debug C$:/Users/user/Documents/python/main.cpp || cmake_object_order_depends_target_LAB1
+  CONFIG = Debug
   DEFINES = -DVERSION_PROJECT=\"1.0.0\"
   DEP_FILE = CMakeFiles\LAB1.dir\main.cpp.obj.d
+  FLAGS = -g
   OBJECT_DIR = CMakeFiles\LAB1.dir
   OBJECT_FILE_DIR = CMakeFiles\LAB1.dir
   TARGET_COMPILE_PDB = CMakeFiles\LAB1.dir\
@@ -61,7 +68,9 @@ build CMakeFiles/LAB1.dir/main.cpp.obj: CXX_COMPILER__LAB1_unscanned_ C$:/Users/
 #############################################
 # Link the executable LAB1.exe
 
-build LAB1.exe: CXX_EXECUTABLE_LINKER__LAB1_ CMakeFiles/LAB1.dir/main.cpp.obj
+build LAB1.exe: CXX_EXECUTABLE_LINKER__LAB1_Debug CMakeFiles/LAB1.dir/main.cpp.obj
+  CONFIG = Debug
+  FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\LAB1.dir
   POST_BUILD = cd .
